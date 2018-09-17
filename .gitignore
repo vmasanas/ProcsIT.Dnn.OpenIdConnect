@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs
+/Client/obj
+/packages
+/Provider/bin/Debug
+/Provider/obj/Debug
+/Provider/packages
+/Provider/ProcsIT.Dnn.AuthServices.OpenIdConnect.csproj.user
