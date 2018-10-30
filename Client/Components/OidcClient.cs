@@ -7,27 +7,18 @@ namespace ProcsIT.Dnn.Authentication.OpenIdConnect.Components
 {
     public class OidcClient : OidcClientBase
     {
+        protected override TimeSpan GetExpiry(int expirseIn) => new TimeSpan(0, 0, expirseIn);
+
+        protected override string GetToken(string accessToken) => accessToken;
+
         public OidcClient(int portalId, AuthMode mode)
           : base(portalId, mode, "Oidc")
         {
-            TokenEndpoint = "https://localhost:5001/connect/token";
             AuthorizationEndpoint = "https://localhost:5001/connect/authorize";
+            TokenEndpoint = "https://localhost:5001/connect/token";
+            UserInfoEndpoint = "https://localhost:5001/connect/userinfo";
+
             Scope = HttpUtility.UrlEncode("openid profile offline_access api1");
-            MeGraphEndpoint = "https://localhost:5001/connect/userinfo";
-            AuthTokenName = "OidcUserToken";
-            LoadTokenCookie(string.Empty);
-        }
-
-        //protected override string UserGuidKey => base.UserGuidKey;
-
-        protected override TimeSpan GetExpiry(Int32 expiresIn)
-        {
-            return new TimeSpan(0, 0, expiresIn);
-        }
-
-        protected override string GetToken(string accessToken)
-        {
-            return accessToken;
         }
     }
 }
