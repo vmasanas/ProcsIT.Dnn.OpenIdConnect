@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Login.ascx.cs" Inherits="DotNetNuke.Authentication.Oidc.Login" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Login.ascx.cs" Inherits="ProcsIT.Dnn.Authentication.OpenIdConnect.Login" %>
 <div class="container">
 <ul class="buttonList">
     <li id="loginItem" runat="server" class="oidc" >
