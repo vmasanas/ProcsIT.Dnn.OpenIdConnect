@@ -104,7 +104,7 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
 
             var loginStatus = UserLoginStatus.LOGIN_FAILURE;
             var objUserInfo = UserController.ValidateUser(settings.PortalId, userId, string.Empty, _service, string.Empty, settings.PortalName, IPAddress, ref loginStatus);
-            if (objUserInfo == null || objUserInfo.IsDeleted || loginStatus != UserLoginStatus.LOGIN_SUCCESS)
+            if (objUserInfo != null && (objUserInfo.IsDeleted || loginStatus != UserLoginStatus.LOGIN_SUCCESS))
                 return AuthorisationResult.Denied;
 
             var parameters = new List<QueryParameter>
