@@ -41,7 +41,7 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
         private const string OAuthRedirectUriKey = "redirect_uri";
         private const string OAuthGrantTypeKey = "grant_type";
         private const string OAuthCodeKey = "code";
-        private const string OAuthHybrid = "code id_token";
+        private const string OAuthHybrid = "code"; // TODO: was "code id_token";
 
         private readonly Random _random = new Random();
 

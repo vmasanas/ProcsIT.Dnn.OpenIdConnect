@@ -1,16 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2035
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{DEA09A26-E6A9-42E6-A2D7-12B81CFD47ED}"
-	ProjectSection(SolutionItems) = preProject
-		LICENSE = LICENSE
-		README.md = README.md
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcsIT.Dnn.AuthServices.OpenIdConnect", "Provider\ProcsIT.Dnn.AuthServices.OpenIdConnect.csproj", "{3185E0CA-0C71-42F5-BB07-5A24BE10AAC5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcsIT.Dnn.Authentication.OpenIdConnect", "Client\ProcsIT.Dnn.Authentication.OpenIdConnect.csproj", "{8BFB1965-7C12-4663-8466-C7B7E99849D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcsIT.Dnn.AuthServices.OpenIdConnect", "ProcsIT.Dnn.AuthServices.OpenIdConnect.csproj", "{3185E0CA-0C71-42F5-BB07-5A24BE10AAC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,10 +14,6 @@ Global
 		{3185E0CA-0C71-42F5-BB07-5A24BE10AAC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3185E0CA-0C71-42F5-BB07-5A24BE10AAC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3185E0CA-0C71-42F5-BB07-5A24BE10AAC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8BFB1965-7C12-4663-8466-C7B7E99849D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BFB1965-7C12-4663-8466-C7B7E99849D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BFB1965-7C12-4663-8466-C7B7E99849D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BFB1965-7C12-4663-8466-C7B7E99849D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

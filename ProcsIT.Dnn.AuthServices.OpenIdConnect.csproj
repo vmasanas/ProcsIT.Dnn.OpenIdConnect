@@ -1,25 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3185E0CA-0C71-42F5-BB07-5A24BE10AAC5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>ProcsIT.Dnn.AuthServices.OpenIdConnect</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <ApplicationVersion>9.2.1.533</ApplicationVersion>
     <FileAlignment>512</FileAlignment>
     <RootNamespace>ProcsIT.Dnn.AuthServices.OpenIdConnect</RootNamespace>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,30 +33,42 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DotNetNuke">
-      <HintPath>..\packages\DotNetNuke.Core.9.2.1.533\lib\net40\DotNetNuke.dll</HintPath>
+      <HintPath>..\..\..\bin\DotNetNuke.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="DotNetNuke.Instrumentation">
-      <HintPath>..\packages\DotNetNuke.Instrumentation.9.2.1.533\lib\net40\DotNetNuke.Instrumentation.dll</HintPath>
+      <HintPath>..\..\..\bin\DotNetNuke.Instrumentation.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="IdentityModel, Version=2.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\IdentityModel.2.6.0\lib\net45\IdentityModel.dll</HintPath>
+      <HintPath>packages\IdentityModel.2.6.0\lib\net45\IdentityModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.Data">
+      <HintPath>Dependencies\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.3.0\lib\net45\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+      <HintPath>packages\Microsoft.IdentityModel.JsonWebTokens.5.3.0\lib\net45\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Logging, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.3.0\lib\net45\Microsoft.IdentityModel.Logging.dll</HintPath>
+      <HintPath>packages\Microsoft.IdentityModel.Logging.5.3.0\lib\net45\Microsoft.IdentityModel.Logging.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.3.0\lib\net45\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <HintPath>packages\Microsoft.IdentityModel.Tokens.5.3.0\lib\net45\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.3.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <HintPath>packages\System.IdentityModel.Tokens.Jwt.5.3.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web" />
@@ -68,6 +81,11 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="AuthExtensions.cs" />
     <Compile Include="AuthorisationResult.cs" />
+    <Compile Include="Components\OidcClient.cs" />
+    <Compile Include="Components\OidcUserData.cs" />
+    <Compile Include="Login.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="OidcClientBase.cs" />
     <Compile Include="OidcConfigBase.cs" />
     <Compile Include="OidcLoginBase.cs">
@@ -75,15 +93,29 @@
     </Compile>
     <Compile Include="QueryParameter.cs" />
     <Compile Include="QueryParameterComparer.cs" />
+    <Compile Include="Settings.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Install\DNN.Authentication.OpenIdConnect.dnn" />
     <None Include="LICENSE" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Login.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Settings.ascx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_LocalResources\Login.ascx.resx" />
+    <EmbeddedResource Include="App_LocalResources\Settings.ascx.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
