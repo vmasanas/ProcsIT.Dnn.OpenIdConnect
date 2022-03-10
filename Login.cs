@@ -9,7 +9,7 @@ namespace ProcsIT.Dnn.Authentication.OpenIdConnect
 {
     public class Login : OidcLoginBase
     {
-        protected HtmlGenericControl loginItem;
+        protected PlaceHolder plOidc;
         protected LinkButton loginButton;
 
         protected override string AuthSystemApplicationName => "Oidc";
@@ -23,7 +23,7 @@ namespace ProcsIT.Dnn.Authentication.OpenIdConnect
             base.OnInit(e);
             loginButton.Click += new EventHandler(LoginButton_Click);
             OAuthClient = new OidcClient(PortalId, Mode);
-            loginItem.Visible = Mode == AuthMode.Login;
+            plOidc.Visible = Mode == AuthMode.Login;
         }
 
         private void LoginButton_Click(object sender, EventArgs e)

@@ -18,7 +18,10 @@ namespace ProcsIT.Dnn.Authentication.OpenIdConnect.Components
             TokenEndpoint =         "https://api.mpin.io/oidc/token";
             UserInfoEndpoint =      "https://api.mpin.io/oidc/userinfo";
 
-            Scope = HttpUtility.UrlEncode("openid profile offline_access api1");
+            Scope = HttpUtility.UrlEncode("openid email");
+
+            //TODO: Request scopes on settings
+            //Scope = HttpUtility.UrlEncode("openid profile offline_access api1");
         }
     }
 }

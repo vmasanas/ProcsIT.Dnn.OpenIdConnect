@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
-		<package name="DNN.Authentication.OpenIdConnect" type="Auth_System" version="01.00.00">
+		<package name="DNN.Authentication.OpenIdConnect" type="Auth_System" version="02.00.00">
 			<friendlyName>DNN.Authentication.OpenIdConnect</friendlyName>
 			<description>DNN.Authentication.OpenIdConnect</description>
 
@@ -39,7 +39,7 @@
 						<assembly>
 							<path>bin</path>
 							<name>DNN.AuthServices.OpenIdConnect.dll</name>
-							<version>02.02.00</version>
+							<version>02.00.00</version>
 						</assembly>
 					</assemblies>
 				</component>

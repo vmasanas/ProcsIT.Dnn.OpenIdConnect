@@ -41,7 +41,12 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
         private const string OAuthRedirectUriKey = "redirect_uri";
         private const string OAuthGrantTypeKey = "grant_type";
         private const string OAuthCodeKey = "code";
-        private const string OAuthHybrid = "code"; // TODO: was "code id_token";
+        private const string OAuthHybrid = "code";
+
+        // TODO: request flow on settings: 
+        // - code
+        // - code id_token
+        //private const string OAuthHybrid = "code id_token";
 
         private readonly Random _random = new Random();
 
@@ -94,9 +99,35 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
             // The client can be configured to set required items or not ask for consent. But if not:
             // TODO: implement missing refresh token, unable to access api
             var acceptedScopes = HttpContext.Current.Request["Scope"];
-            
-            // IdentityToken is available, perform checks:
+
+            // Hybrid flow it needs to be
             var identityToken = HttpContext.Current.Request["id_token"];
+            if (string.IsNullOrEmpty(identityToken))
+            {
+                // Authorizaton flow
+                // exchange access code for token
+                var codeParams = new List<QueryParameter>
+                {
+                    new QueryParameter { Name = OAuthClientIdKey, Value = _apiKey },
+                    new QueryParameter { Name = OAuthClientSecretKey, Value = _apiSecret },
+                    new QueryParameter { Name = OAuthCodeKey, Value = VerificationCode },
+
+                    new QueryParameter { Name = OAuthRedirectUriKey, Value = _callbackUri },
+                    new QueryParameter { Name = OAuthGrantTypeKey, Value = "authorization_code" },
+                };
+
+                var codeResponse = ExecuteWebRequest(HttpMethod.Post, new Uri(TokenEndpoint), codeParams.ToNormalizedString(), string.Empty);
+                if (codeResponse == null)
+                    return AuthorisationResult.Denied;
+
+                TokenResponse = new TokenResponse(codeResponse);
+
+                if (TokenResponse.IsError || string.IsNullOrEmpty(TokenResponse.IdentityToken))
+                    return AuthorisationResult.Denied;
+
+                identityToken = TokenResponse.IdentityToken;
+            }
+
             var userId = GetUserId(identityToken);
 
             if (userId == null)
@@ -105,27 +136,6 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
             var loginStatus = UserLoginStatus.LOGIN_FAILURE;
             var objUserInfo = UserController.ValidateUser(settings.PortalId, userId, string.Empty, _service, string.Empty, settings.PortalName, IPAddress, ref loginStatus);
             if (objUserInfo != null && (objUserInfo.IsDeleted || loginStatus != UserLoginStatus.LOGIN_SUCCESS))
-                return AuthorisationResult.Denied;
-
-            var parameters = new List<QueryParameter>
-            {
-                new QueryParameter { Name = OAuthClientIdKey, Value = _apiKey },
-                new QueryParameter { Name = OAuthRedirectUriKey, Value = _callbackUri },
-                new QueryParameter { Name = OAuthClientSecretKey, Value = _apiSecret },
-                new QueryParameter { Name = OAuthGrantTypeKey, Value = "authorization_code" },
-                new QueryParameter { Name = OAuthCodeKey, Value = VerificationCode }
-            };
-
-            if (!string.IsNullOrEmpty(APIResource))
-                parameters.Add(new QueryParameter { Name = "resource", Value = APIResource });
-
-            var responseText = ExecuteWebRequest(HttpMethod.Post, new Uri(TokenEndpoint), parameters.ToNormalizedString(), string.Empty);
-            if (responseText == null)
-                return AuthorisationResult.Denied;
-
-            TokenResponse = new TokenResponse(responseText);
-
-            if (TokenResponse.IsError)
                 return AuthorisationResult.Denied;
 
             AuthTokenExpiry = GetExpiry(Convert.ToInt32(TokenResponse.ExpiresIn));
@@ -151,7 +161,7 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
 
             return Convert.ToBase64String(hashBytes);
         }
-        
+
         private string ExecuteWebRequest(HttpMethod method, Uri uri, string parameters, string authHeader)
         {
             WebRequest request;
@@ -237,8 +247,7 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
         {
             var loginStatus = UserLoginStatus.LOGIN_FAILURE;
 
-            var objUserInfo = UserController.ValidateUser(settings.PortalId, user.Id, string.Empty, _service, string.Empty, settings.PortalName, IPAddress, ref loginStatus);
-
+            var objUserInfo = UserController.ValidateUser(settings.PortalId, user.Id, string.Empty, _service, user.Id, settings.PortalName, IPAddress, ref loginStatus);
 
             // Raise UserAuthenticated Event
             var eventArgs = new UserAuthenticatedEventArgs(objUserInfo, user.Id, loginStatus, _service)
@@ -314,7 +323,10 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
                 return null;
 
             var token = tokenHandler.ReadJwtToken(identityToken);
-            return $"{_service}_{token.Claims.FirstOrDefault(c => c.Type == "sub")?.Value}";
+
+            // always use email
+            // was: return $"{_service}_{token.Claims.FirstOrDefault(c => c.Type == "sub")?.Value}";
+            return $"{token.Claims.FirstOrDefault(c => c.Type == "sub")?.Value}";
         }
 
         public bool HasVerificationCode()
