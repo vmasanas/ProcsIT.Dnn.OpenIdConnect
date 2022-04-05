@@ -10,7 +10,6 @@
 						<type>Oidc</type>
 						<settingsControlSrc>DesktopModules/AuthenticationServices/DNN.Authentication.OpenIdConnect/Settings.ascx</settingsControlSrc>
 						<loginControlSrc>DesktopModules/AuthenticationServices/DNN.Authentication.OpenIdConnect/Login.ascx</loginControlSrc>
-						<logoffControlSrc>DesktopModules/AuthenticationServices/DNN.Authentication.OpenIdConnect/Logoff.ascx</logoffControlSrc>
 					</authenticationService>
 				</component>
 
@@ -38,8 +37,43 @@
 					<assemblies>
 						<assembly>
 							<path>bin</path>
-							<name>DNN.AuthServices.OpenIdConnect.dll</name>
+							<name>ProcsIT.Dnn.AuthServices.OpenIdConnect.dll</name>
 							<version>02.00.00</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>IdentityModel.dll</name>
+							<version>02.06.00</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Microsoft.IdentityModel.JsonWebTokens.dll</name>
+							<version>5.3.0.51005</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Microsoft.IdentityModel.Logging.dll</name>
+							<version>5.3.0.51005</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>Microsoft.IdentityModel.Tokens.dll</name>
+							<version>5.3.0.51005</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>BouncyCastle.Crypto.dll</name>
+							<version>1.8.10.1</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>System.IdentityModel.dll</name>
+							<version>4.8.3761.0</version>
+						</assembly>
+						<assembly>
+							<path>bin</path>
+							<name>System.IdentityModel.Tokens.Jwt.dll</name>
+							<version>5.3.0.0</version>
 						</assembly>
 					</assemblies>
 				</component>
