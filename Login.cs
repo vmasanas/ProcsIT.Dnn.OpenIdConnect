@@ -31,5 +31,4 @@ namespace ProcsIT.Dnn.Authentication.OpenIdConnect
             OAuthClient.Authorize();
         }
     }
-
 }

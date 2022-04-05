@@ -252,7 +252,7 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
             // Raise UserAuthenticated Event
             var eventArgs = new UserAuthenticatedEventArgs(objUserInfo, user.Id, loginStatus, _service)
             {
-                AutoRegister = true
+                AutoRegister = PortalSettings.Current.UserRegistration != 0 
             };
 
             // TODO:

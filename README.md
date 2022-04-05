@@ -1,4 +1,4 @@
-# ProcsIT.Dnn.OpenIdConnect
+ ProcsIT.Dnn.OpenIdConnect
 OpenIdConnect provider and plugin for DNN (DotNetNuke).
 
 I've written an OpenIdConnect provider because I needed one and no public providers were available. I am not a member of the DNN community and I have no further knowledge of DNN.
@@ -25,8 +25,6 @@ Update the settings in the plugin:
             Scope = HttpUtility.UrlEncode("openid profile offline_access api1");
             UserInfoEndpoint = "https://localhost:5001/connect/userinfo";
         }
-
-There is no package available to install this component. So in order to make this work, copy the provider dll and plugin dll to the \Website\bin folder. Copy the web UI to \Website\DesktopModules\AuthenticationServices\oidc.
 
 Configure DNN to add oidc authentication. When succeeded an extra tab will be visible with a link to the IDP. After clicking on the link the user is redirected to the IDP, logs in and is redirected back to DNN. At that point the admin will receive a message that a new user needs to be approved.
 
