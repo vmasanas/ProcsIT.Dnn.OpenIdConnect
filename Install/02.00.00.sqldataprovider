@@ -1,0 +1,11 @@
+﻿CREATE TRIGGER Oidc_Users_AfterInsertUpdate
+   ON Users
+   AFTER INSERT,UPDATE
+AS 
+BEGIN
+	insert into UserAuthentication(userid,AuthenticationType,AuthenticationToken)
+	select userid,'Oidc',email
+	from users
+	where userid not in (select userid from UserAuthentication)
+END
+GO

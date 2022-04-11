@@ -3,16 +3,15 @@
 		<package name="DNN.Authentication.OpenIdConnect" type="Auth_System" version="02.00.00">
 			<friendlyName>DNN.Authentication.OpenIdConnect</friendlyName>
 			<description>DNN.Authentication.OpenIdConnect</description>
-
 			<components>
 				<component type="AuthenticationSystem">
 					<authenticationService>
 						<type>Oidc</type>
 						<settingsControlSrc>DesktopModules/AuthenticationServices/DNN.Authentication.OpenIdConnect/Settings.ascx</settingsControlSrc>
 						<loginControlSrc>DesktopModules/AuthenticationServices/DNN.Authentication.OpenIdConnect/Login.ascx</loginControlSrc>
+						<logoffControlSrc/>
 					</authenticationService>
 				</component>
-
 				<component type="File">
 					<files>
 						<basePath>DesktopModules/AuthenticationServices/DNN.Authentication.OpenIdConnect</basePath>
@@ -32,7 +31,6 @@
 						</file>
 					</files>
 				</component>
-
 				<component type="Assembly">
 					<assemblies>
 						<assembly>
@@ -77,8 +75,17 @@
 						</assembly>
 					</assemblies>
 				</component>
+				<component type="Script">
+					<scripts>
+						<basePath>DesktopModules/AuthenticationServices/DNN.Authentication.OpenIdConnect</basePath>
+						<script type="Install">
+							<path>Install</path>
+							<name>02.00.00.sqldataprovider</name>
+							<version>02.00.00</version>
+						</script>
+					</scripts>
+				</component>
 			</components>
-
 		</package>
 	</packages>
 </dotnetnuke>

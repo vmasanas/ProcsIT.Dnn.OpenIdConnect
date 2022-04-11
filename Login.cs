@@ -23,7 +23,21 @@ namespace ProcsIT.Dnn.Authentication.OpenIdConnect
             base.OnInit(e);
             loginButton.Click += new EventHandler(LoginButton_Click);
             OAuthClient = new OidcClient(PortalId, Mode);
-            plOidc.Visible = Mode == AuthMode.Login;
+
+            OidcConfigBase config = OidcConfigBase.GetConfig(AuthSystemApplicationName, PortalId);
+
+            if (Request.QueryString["NoIdc"] != null && config.NoIdc)
+            {
+                // do not process the automatic login
+            }
+            else if (Request.HttpMethod != "POST" && Request["code"] is null && !Request.IsAuthenticated && config.AutoLogin)
+            {
+                OAuthClient.Authorize();
+            }
+            else
+            {
+                plOidc.Visible = Mode == AuthMode.Login;
+            }
         }
 
         private void LoginButton_Click(object sender, EventArgs e)

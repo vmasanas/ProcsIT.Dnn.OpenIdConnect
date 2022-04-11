@@ -26,7 +26,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\..\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -95,13 +95,18 @@
     </Compile>
     <Compile Include="QueryParameter.cs" />
     <Compile Include="QueryParameterComparer.cs" />
-    <Compile Include="Settings.cs">
+    <Compile Include="Settings.ascx.cs">
+      <DependentUpon>Settings.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings.ascx.designer.cs">
+      <DependentUpon>Settings.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="UserData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Install\02.00.00.sqldataprovider" />
     <None Include="Install\DNN.Authentication.OpenIdConnect.dnn" />
     <None Include="LICENSE" />
     <None Include="packages.config">
@@ -113,7 +118,9 @@
     <Content Include="Login.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="Settings.ascx" />
+    <Content Include="Settings.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_LocalResources\Login.ascx.resx" />

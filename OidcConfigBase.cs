@@ -13,6 +13,12 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
     public class OidcConfigBase : AuthenticationConfigBase
     {
         private const string _cacheKey = "OidcAuthentication";
+        protected string Service { get; set; }
+        public string APIKey { get; set; }
+        public string APISecret { get; set; }
+        public bool Enabled { get; set; }
+        public bool AutoLogin { get; set; }
+        public bool NoIdc { get; set; }
 
         protected OidcConfigBase(string service, int portalId)
             : base(portalId)
@@ -22,15 +28,9 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
             APIKey = PortalController.GetPortalSetting(Service + "_APIKey", portalId, "");
             APISecret = PortalController.GetPortalSetting(Service + "_APISecret", portalId, "");
             Enabled = PortalController.GetPortalSettingAsBoolean(Service + "_Enabled", portalId, false);
+            AutoLogin = PortalController.GetPortalSettingAsBoolean(Service + "_AutoLogin", portalId, false);
+            NoIdc = PortalController.GetPortalSettingAsBoolean(Service + "_NoIdc", portalId, false);
         }
-
-        protected string Service { get; set; }
-
-        public string APIKey { get; set; }
-
-        public string APISecret { get; set; }
-
-        public bool Enabled { get; set; }
 
         private static string GetCacheKey(string service, int portalId)
         {
@@ -59,6 +59,8 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
             PortalController.UpdatePortalSetting(config.PortalID, config.Service + "_APIKey", config.APIKey);
             PortalController.UpdatePortalSetting(config.PortalID, config.Service + "_APISecret", config.APISecret);
             PortalController.UpdatePortalSetting(config.PortalID, config.Service + "_Enabled", config.Enabled.ToString(CultureInfo.InvariantCulture));
+            PortalController.UpdatePortalSetting(config.PortalID, config.Service + "_AutoLogin", config.AutoLogin.ToString(CultureInfo.InvariantCulture));
+            PortalController.UpdatePortalSetting(config.PortalID, config.Service + "_NoIdc", config.NoIdc.ToString(CultureInfo.InvariantCulture));
             ClearConfig(config.Service, config.PortalID);
         }
     }
