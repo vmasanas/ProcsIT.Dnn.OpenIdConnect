@@ -14,6 +14,11 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
     {
         private const string _cacheKey = "OidcAuthentication";
         protected string Service { get; set; }
+
+        public string AuthorizationEndpoint { get; set; }
+        public string TokenEndpoint { get; set; }
+        public string UserInfoEndpoint { get; set; }
+
         public string APIKey { get; set; }
         public string APISecret { get; set; }
         public bool Enabled { get; set; }
@@ -24,6 +29,10 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
             : base(portalId)
         {
             Service = service;
+
+            AuthorizationEndpoint = PortalController.GetPortalSetting(Service + "_AuthorizationEndpoint", portalId, "");
+            TokenEndpoint = PortalController.GetPortalSetting(Service + "_TokenEndpoint", portalId, "");
+            UserInfoEndpoint = PortalController.GetPortalSetting(Service + "_UserInfoEndpoint", portalId, "");
 
             APIKey = PortalController.GetPortalSetting(Service + "_APIKey", portalId, "");
             APISecret = PortalController.GetPortalSetting(Service + "_APISecret", portalId, "");
@@ -56,6 +65,10 @@ namespace ProcsIT.Dnn.AuthServices.OpenIdConnect
 
         public static void UpdateConfig(OidcConfigBase config)
         {
+            PortalController.UpdatePortalSetting(config.PortalID, config.Service + "_AuthorizationEndpoint", config.AuthorizationEndpoint);
+            PortalController.UpdatePortalSetting(config.PortalID, config.Service + "_TokenEndpoint", config.TokenEndpoint);
+            PortalController.UpdatePortalSetting(config.PortalID, config.Service + "_UserInfoEndpoint", config.UserInfoEndpoint);
+
             PortalController.UpdatePortalSetting(config.PortalID, config.Service + "_APIKey", config.APIKey);
             PortalController.UpdatePortalSetting(config.PortalID, config.Service + "_APISecret", config.APISecret);
             PortalController.UpdatePortalSetting(config.PortalID, config.Service + "_Enabled", config.Enabled.ToString(CultureInfo.InvariantCulture));

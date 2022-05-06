@@ -1,5 +1,20 @@
 <%@ Control Language="C#" AutoEventWireup="false" Inherits="ProcsIT.Dnn.Authentication.OpenIdConnect.Settings" CodeBehind="Settings.ascx.cs" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.UI.WebControls" Assembly="DotNetNuke" %>
+
+<div class="dnnFormItem">
+    <asp:Label ID="Label1" runat="server" Text="Authorization Endpoint URL:" />
+    <asp:TextBox runat="server" ID="txtAuthorizationEndpoint" Width="500px"></asp:TextBox>
+</div>
+<div class="dnnFormItem">
+    <asp:Label ID="Label2" runat="server" Text="Token Endpoint URL:" />
+    <asp:TextBox runat="server" ID="txtTokenEndpoint" Width="500px"></asp:TextBox>
+</div>
+<div class="dnnFormItem">
+    <asp:Label ID="Label3" runat="server" Text="UserInfo Endpoint URL:" />
+    <asp:TextBox runat="server" ID="txtUserInfoEndpoint" Width="500px"></asp:TextBox>
+</div>
+
+
 <div class="dnnFormItem">
     <asp:Label ID="lblAppId" runat="server" Text="APP ID:" />
     <asp:TextBox runat="server" ID="txtAppID" Width="200px"></asp:TextBox>

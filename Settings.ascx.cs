@@ -15,6 +15,11 @@ namespace ProcsIT.Dnn.Authentication.OpenIdConnect
             try
             {
                 var config = OidcConfigBase.GetConfig(Service, PortalId);
+
+                txtAuthorizationEndpoint.Text = config.AuthorizationEndpoint;
+                txtTokenEndpoint.Text = config.TokenEndpoint;
+                txtUserInfoEndpoint.Text = config.UserInfoEndpoint;
+
                 txtAppID.Text = config.APIKey;
                 txtAppSecret.Text = config.APISecret;
                 chkEnabled.Checked = config.Enabled;
@@ -31,6 +36,10 @@ namespace ProcsIT.Dnn.Authentication.OpenIdConnect
             try
             {
                 var config = OidcConfigBase.GetConfig(Service, PortalId);
+                config.AuthorizationEndpoint = txtAuthorizationEndpoint.Text;
+                config.TokenEndpoint = txtTokenEndpoint.Text;
+                config.UserInfoEndpoint = txtUserInfoEndpoint.Text;
+
                 config.PortalID = PortalId;
                 config.APIKey = txtAppID.Text;
                 config.APISecret = txtAppSecret.Text;

@@ -14,9 +14,11 @@ namespace ProcsIT.Dnn.Authentication.OpenIdConnect.Components
         public OidcClient(int portalId, AuthMode mode)
           : base(portalId, mode, "Oidc")
         {
-            AuthorizationEndpoint = "https://api.mpin.io/authorize";
-            TokenEndpoint =         "https://api.mpin.io/oidc/token";
-            UserInfoEndpoint =      "https://api.mpin.io/oidc/userinfo";
+            OidcConfigBase config = OidcConfigBase.GetConfig("Oidc", portalId);
+
+            AuthorizationEndpoint = config.AuthorizationEndpoint;
+            TokenEndpoint =         config.TokenEndpoint;
+            UserInfoEndpoint =      config.UserInfoEndpoint;
 
             Scope = HttpUtility.UrlEncode("openid email");
 
